@@ -35,6 +35,9 @@ class PcapErrorPermDenied(Exception):
 class PcapErrorIfaceNotUp(Exception):
     pass
 
+class PcapErrorNoSelectableFD(Exception):
+    pass
+
 class PcapWarning(Exception):
     pass
 
@@ -417,6 +420,32 @@ cdef class PcapLive(Pcap):
                 # With a live file capture, this should only happen when not activated
                 raise PcapErrorNotActivated()
             return res
+
+    property selectable_fd:
+        """A file descriptor on which a select() can be done for a live capture
+
+        Raises:
+            PcapError, PcapErrorNoSelectableFD
+
+        """
+        def __get__(self):
+            res = pcap_get_selectable_fd(self.__pcap)
+            if res == -1:
+                # This is only documented to return -1 if no such fd exists
+                raise PcapErrorNoSelectableFD()
+            return res
+
+    property immediate:
+        """Set immediate mode for a not-yet-activated capture handle
+
+        Raises:
+            PcapError, PcapErrorActivated
+
+        """
+        def __set__(self, immediate):
+            res = pcap_set_immediate_mode(self.__pcap, immediate)
+            if res != 0:
+                raise PcapErrorActivated()
 
     # Reverse the logic from checking the negative: nonblock
     property blocking:

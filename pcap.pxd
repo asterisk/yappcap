@@ -94,7 +94,9 @@ cdef extern from "pcap.h":
         int	pcap_set_rfmon(pcap_t *, int)
         int	pcap_set_timeout(pcap_t *, int)
         int	pcap_set_buffer_size(pcap_t *, int)
+        int	pcap_set_immediate_mode(pcap_t *, int)
     int pcap_fileno(pcap_t *)
+    int pcap_get_selectable_fd(pcap_t *)
     int pcap_setnonblock(pcap_t *, int, char *)
     int pcap_getnonblock(pcap_t *, char *)
 
