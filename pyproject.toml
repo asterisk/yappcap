@@ -1,17 +1,17 @@
 [build-system]
-requires = ["wheel", "setuptools>=59", "Cython==0.29.30", "cython-setuptools==0.2.3" ]
+requires = ["wheel", "setuptools>=59", "Cython==0.29.34", "cython-setuptools==0.2.3" ]
 build-backend = "setuptools.build_meta"
 
 [project]
 name="yappcap"
-version="0.0.3"
+version="0.0.4"
 requires-python='>=3'
 classifiers=[  # Optional
     "Development Status :: 4 - Beta",
     'Intended Audience :: Developers',
     'Programming Language :: Python :: 3',
     ]
-dependencies = [ "Cython==0.29.30" ]
+dependencies = [ "Cython==0.29.34" ]
 
 [project.urls]
     "Homepage" = "https://github.com/asterisk/yappcap"
